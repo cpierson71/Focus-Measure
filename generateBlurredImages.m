@@ -1,13 +1,14 @@
-img = imread('pkg1.jpg');
-% img = rgb2gray(img);
-imgBlurred = [img];
-N = 17;
-% imgBlurred = zeros([size(img), N]);
+function imgsBlurred = generateBlurredImages(I,rl,rh,N)
+%img - image to create blurred copies of
+%rl,rh - lower and upper bound of radius for disk blur
+%N - number of blurred images to create
+%First image of output is original image
 
-for k = 1:2:N
+imgsBlurred = I;
 
-h = fspecial('disk',k);
-imgBlurred = cat(4,imgBlurred,imfilter(img,h));
-
+for k = rl:N\(rh-rl):rh
+    h = fspecial('disk',k);
+    imgsBlurred = cat(4,imgsBlurred,imfilter(I,h));
 end
 
+end
