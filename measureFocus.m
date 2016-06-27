@@ -1,3 +1,4 @@
+tic
 
 hHoriz = fspecial('sobel');
 hVert = hHoriz';
@@ -6,10 +7,10 @@ I = imread('pkg1.jpg');
 % I = imread('yosemite.jpg');
 
 % imgBlurred = generateBlurredImages(I,1,20,10);
-imgBlurred = generateBlurredImages(I,1,20,5,'motion');
+imgBlurred = generateBlurredImages(I,1,25,5,'disk');
 
 img = [];
-[x,y,~,w] = size(imgBlurred);
+[~,~,~,w] = size(imgBlurred);
 m = zeros(1,w);
 
 for k = 1:w
@@ -18,6 +19,8 @@ for k = 1:w
     x = mean(img(:,:,k));
     m(k) = mean(x);
 end
+
+toc
 
 imgs = concatenateImages(imgBlurred);
 imgsBlur = concatenateImages(img);

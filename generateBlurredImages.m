@@ -1,4 +1,4 @@
-function imgsBlurred = generateBlurredImages(I,rl,rh,N,blurType)
+function imgsBlurred = generateBlurredImages(I,lb,ub,N,blurType)
 %img - image to create blurred copies of
 %rl,rh - lower and upper bound of radius for disk blur
 %N - number of blurred images to create
@@ -8,12 +8,12 @@ imgsBlurred = I;
 
 switch blurType
     case 'disk'
-        for k = rl:(rh-rl)/N:rh
+        for k = lb:(ub-lb)/(N-1):ub
             h = fspecial('disk',k);
             imgsBlurred = cat(4,imgsBlurred,imfilter(I,h));
         end
     case 'motion'
-        for k = 5:59/N:60
+        for k = lb:(ub-lb)/(N-1):ub
             h = fspecial('motion',k,45);
             imgsBlurred = cat(4,imgsBlurred,imfilter(I,h));
         end
