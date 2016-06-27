@@ -1,18 +1,20 @@
 % Horizontal and vertical edge finder
 
+tic
+
 hHoriz = fspecial('sobel');
 hVert = hHoriz';
 
-% I = imread('pkg1.jpg');
-I = imread('yosemite.jpg');
+I = imread('pkg1.jpg');
+% I = imread('yosemite.jpg');
 
-imgBlurred = generateBlurredImages(I,1,8,10);
+imgBlurred = generateBlurredImages(I,1,20,10,'disk');
 
 img = [];
 imgV = [];
 imgH = [];
 imgBlend = [];
-[x,y,~,w] = size(imgBlurred);
+[~,~,~,w] = size(imgBlurred);
 m = zeros(1,w);
 
 for k = 1:w
@@ -24,6 +26,8 @@ for k = 1:w
     m(k) = mean(x);
 end
 
+toc
+
 imgs = concatenateImages(imgBlurred);
 imgsBlur = concatenateImages(imgBlend);
 
@@ -31,11 +35,7 @@ figure
 stem(m)
 
 figure
-subplot(2,1,1)
-subimage(imgs)
-axis off
-subplot(2,1,2)
-subimage(imgsBlur)
-axis off
+imshow(imgs)
 
-
+figure
+imshow(imgsBlur)
