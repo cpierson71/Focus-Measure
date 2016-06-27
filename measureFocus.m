@@ -2,10 +2,11 @@
 hHoriz = fspecial('sobel');
 hVert = hHoriz';
 
-% I = imread('pkg1.jpg');
-I = imread('yosemite.jpg');
+I = imread('pkg1.jpg');
+% I = imread('yosemite.jpg');
 
-imgBlurred = generateBlurredImages(I,1,20,10);
+% imgBlurred = generateBlurredImages(I,1,20,10);
+imgBlurred = generateBlurredImages(I,1,20,5,'motion');
 
 img = [];
 [x,y,~,w] = size(imgBlurred);
@@ -25,11 +26,15 @@ figure
 stem(m)
 
 figure
-subplot(2,1,1)
-subimage(imgs)
-axis off
-subplot(2,1,2)
-subimage(imgsBlur)
-axis off
+imshow(imgs)
+
+figure
+imshow(imgsBlur)
+% subplot(2,1,1)
+% subimage(imgs)
+% axis off
+% subplot(2,1,2)
+% subimage(imgsBlur)
+% axis off
 
 
